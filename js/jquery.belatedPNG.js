@@ -67,7 +67,7 @@ Absolutely everything in this script is SILLY.  I know this.  IE's rendering of 
 				printStyleSheet.addRule('img.' + this.ns + '_sizeFinder', 'display: none !important;');
 			}
 		},
-		readPropertyChange: function () {
+		readPropertyChange: function (event) {
 			var el, display, v;
 			el = event.srcElement;
 			if (!el.vmlInitiated) {
@@ -307,7 +307,7 @@ Absolutely everything in this script is SILLY.  I know this.  IE's rendering of 
 			return bg[axis];
 		},
 		fixPng: function (el) {
-			var lib, els, nodeStr, v, e;
+			var lib, els, nodeStr, v, e, w, h;
 			if (el.nodeName == 'BODY' || el.nodeName == 'TD' || el.nodeName == 'TR') {
 				return;
 			}
