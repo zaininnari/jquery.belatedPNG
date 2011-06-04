@@ -324,6 +324,7 @@ Absolutely everything in this script is SILLY.  I know this.  IE's rendering of 
 			else if (el.currentStyle.backgroundImage.toLowerCase().search('.png') == -1) {
 				return;
 			}
+			el.isFixedPng = 1;
 			lib = DD_belatedPNG;
 			el.vml = {color: {}, image: {}};
 			els = {shape: {}, fill: {}};
