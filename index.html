@@ -12,24 +12,24 @@
 /* <![CDATA[ */
 div#pngfix,
 div#normal {
-	width: 400px;
-	height: 400px;
-	background: url(test.png) repeat;
-	float: left;
-	
+  width: 400px;
+  height: 400px;
+  background: url(test.png) repeat;
+  float: left;
+
 }
 #demo2 {
-	margin-bottom: 100px;
-	padding-top: 100px;
-	clear:both;
+  margin-bottom: 100px;
+  padding-top: 100px;
+  clear:both;
 }
 
 #sample2 {
-	background-color: red;
+  background-color: red;
 }
 
 #sample2 img {
-	cursor: pointer;
+  cursor: pointer;
 }
 /* ]]> */
 </style>
@@ -39,42 +39,42 @@ div#normal {
 <script type="text/javascript">
 //<![CDATA[
 (function($) {
-	$(function() {
-		// sample 1
-		$("#pngfix").fixPng();
-		$("#sample1 input[type='button']").click(function() {
-			$("#pngfix, #normal").animate({opacity: "toggle"});
-		});
+  $(function() {
+    // sample 1
+    $("#pngfix").fixPng();
+    $("#sample1 input[type='button']").click(function() {
+      $("#pngfix, #normal").animate({opacity: "toggle"});
+    });
 
-		// sample 2
-		$("#pngfix2").fixPng();
-		$("#pngfixOld2").fixPng();
-		$('#pngfix2').each(function(){
-			var thisFied = $(this).attr('isFixedPng') ? this.vml.image.shape : this,
-				self = this;
-			$(thisFied).hover(function() {
-				$(self).animate({opacity: 0.5});
-			}, function () {
-				$(self).animate({opacity: 1});
-			});
-		});
-		$('#pngfixOld2').each(function(){
-			$(this).hover(function() {
-				$(this).animate({opacity: 0.5});
-			}, function () {
-				$(this).animate({opacity: 1});
-			});
-		});
+    // sample 2
+    $("#pngfix2").fixPng();
+    $("#pngfixOld2").fixPng();
+    $('#pngfix2').each(function(){
+      var thisFied = $(this).attr('isFixedPng') ? this.vml.image.shape : this,
+        self = this;
+      $(thisFied).hover(function() {
+        $(self).animate({opacity: 0.5});
+      }, function () {
+        $(self).animate({opacity: 1});
+      });
+    });
+    $('#pngfixOld2').each(function(){
+      $(this).hover(function() {
+        $(this).animate({opacity: 0.5});
+      }, function () {
+        $(this).animate({opacity: 1});
+      });
+    });
 
-		$('#normal2').each(function(){
-			$(this).hover(function() {
-				$(this).animate({opacity: 0.5});
-			}, function () {
-				$(this).animate({opacity: 1});
-			});
-		});
+    $('#normal2').each(function(){
+      $(this).hover(function() {
+        $(this).animate({opacity: 0.5});
+      }, function () {
+        $(this).animate({opacity: 1});
+      });
+    });
 
-		$("#pngfix3").fixPng();
+    $("#pngfix3").fixPng();
     $('#sample3 img').each(function(){
         var thisFied = $(this).attr('isFixedPng') ? this.vml.image.shape : this,
             self = this;
@@ -91,9 +91,9 @@ $("#sample3 input[type='button']").click(function() {
             self = this;
         $(self).animate({left: 340, top: "+=32", width:  64, height:  64, opacity: 0.5}, "slow", "easeInOutQuad")
         .animate({left:  20, top: "-=32", width: 128, height: 128, opacity: 1.0}, "slow", "easeOutCubic");
-	});
+  });
 });
-	});
+  });
 })(jQuery);
 //]]>
 </script>
@@ -108,29 +108,29 @@ $("#sample3 input[type='button']").click(function() {
 <li>ズームに対応</li>
 </ul>
 <div id="sample1">
-	<h3>IE6/7/8&nbsp;用サンプル</h3>
-	<p>左が何もしていない状態、右が&nbsp;jquery.belatedPNG&nbsp;使用後</p>
-	<p><input type="button" value="フェードイン・アウトテスト" /></p>
-	<div id="normal"></div>
-	<div id="pngfix"></div>
+  <h3>IE6/7/8&nbsp;用サンプル</h3>
+  <p>左が何もしていない状態、右が&nbsp;jquery.belatedPNG&nbsp;使用後</p>
+  <p><input type="button" value="フェードイン・アウトテスト" /></p>
+  <div id="normal"></div>
+  <div id="pngfix"></div>
 </div>
 <p id="demo2">以下、追加デモ</p>
 <div id="sample2">
-	<h3>IE6/7/8&nbsp;用サンプル2</h3>
-	<p>左が何もしていない状態、中央が&nbsp;本家jquery.belatedPNG&nbsp;使用後、右が補正後</p>
-	<p>
-		<img src="test.png" alt="sample" width="254" height="254" id="normal2" />
-		<img src="test.png" alt="sample" width="254" height="254" id="pngfixOld2" />
-		<img src="test.png" alt="sample" width="254" height="254" id="pngfix2" />
-	</p>
+  <h3>IE6/7/8&nbsp;用サンプル2</h3>
+  <p>左が何もしていない状態、中央が&nbsp;本家jquery.belatedPNG&nbsp;使用後、右が補正後</p>
+  <p>
+    <img src="test.png" alt="sample" width="254" height="254" id="normal2" />
+    <img src="test.png" alt="sample" width="254" height="254" id="pngfixOld2" />
+    <img src="test.png" alt="sample" width="254" height="254" id="pngfix2" />
+  </p>
 </div>
 <div id="sample3">
-	<h3>IE6/7/8&nbsp;用サンプル(resize)</h3>
-	<p><input type="button" value="アニメーション テスト" /></p>
-	<p>
-		<img src="test.png" alt="sample" width="254" height="254" id="normal3" />
-		<img src="test.png" alt="sample" width="254" height="254" id="pngfix3" />
-	</p>
+  <h3>IE6/7/8&nbsp;用サンプル(resize)</h3>
+  <p><input type="button" value="アニメーション テスト" /></p>
+  <p>
+    <img src="test.png" alt="sample" width="254" height="254" id="normal3" />
+    <img src="test.png" alt="sample" width="254" height="254" id="pngfix3" />
+  </p>
 </div>
 </body>
 </html>

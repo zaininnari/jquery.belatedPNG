@@ -15,4 +15,5 @@ java \
     --js_output_file js/jquery.belatedPNG.min.js \
     --jscomp_off=internetExplorerChecks \
     --externs google-compiler/jquery-1.6.js \
-    --compilation_level WHITESPACE_ONLY
+    --externs google-compiler/extern1.js \
+    --compilation_level SIMPLE_OPTIMIZATIONS

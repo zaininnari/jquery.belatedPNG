@@ -303,11 +303,22 @@ Absolutely everything in this script is SILLY.  I know this.  IE's rendering of 
       }
       el.isFixedPng = 1;
       lib = DD_belatedPNG;
-      el.vml = {color: {}, image: {}};
+      var clone_ = function(o) {
+        /**
+         * clone_ rectangle.
+         * @constructor
+         */
+        var f = function() {};
+        f.prototype = o;
+        return new f();
+      };
       els = {shape: {}, fill: {}};
+      el.vml = {color: clone_(els), image: clone_(els)};
       for (v in el.vml) {
+        // avoid prototype object pollution
         if (el.vml.hasOwnProperty(v)) {
           for (e in els) {
+            // avoid prototype object pollution
             if (els.hasOwnProperty(e)) {
               nodeStr = lib.ns + ':' + e;
               el.vml[v][e] = doc.createElement(nodeStr);
