@@ -239,6 +239,8 @@ Absolutely everything in this script is SILLY.  I know this.  IE's rendering of 
         el.vml.image.shape.style.clip = 'rect(' + dC.T + 'px ' + dC.R + 'px ' + dC.B + 'px ' + dC.L + 'px)';
       }
     },vmlSize: function(el) {
+      var w, h;
+
       if (el.isImg) {
         var width = el.width / 96 * 72;
         var height = el.height / 96 * 72;
