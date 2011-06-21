@@ -41,6 +41,9 @@ Absolutely everything in this script is SILLY.  I know this.  IE's rendering of 
       screenStyleSheet.setAttribute('media', 'screen');
       $('head').get(0).insertBefore(screenStyleSheet, $('head').get(0).firstChild);
       if (screenStyleSheet.styleSheet) {
+        // @see http://blogs.msdn.com/b/ie/archive/2009/03/12/site-compatibility-and-ie8.aspx
+        // "Generic CSS prefix selectors are no longer supported in IE8 Standards Mode in order to provide standards-compliant CSS parsing."
+        // "SOLUTION: Explicitly specify each tag name you want to match when using CSS prefix selectors."
         var selector = !doc.documentMode || doc.documentMode < 8 ? this.ns + '\\:*' : this.ns + '\\:shape, ' + this.ns + '\\:fill';
         screenStyleSheet = screenStyleSheet.styleSheet;
         screenStyleSheet.addRule(selector, 'behavior:url(#default#VML);');
