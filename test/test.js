@@ -321,4 +321,33 @@
 
   });
 
+  test('readPropertyChange display', function() {
+    var eventPropertyName,
+        propertyColorValue,
+        propertyImageValue,
+        el = document.getElementById(testIdFixPng);
+
+    expect(2);
+    $testIdFixPng.fixPng();
+
+    eventPropertyName = 'display';
+    if (!$.support.opacity) {
+      propertyColorValue = el.vml.color.shape.style[eventPropertyName];
+      propertyImageValue = el.vml.image.shape.style[eventPropertyName];
+    } else {
+      propertyColorValue = propertyImageValue = el.style[eventPropertyName];
+    }
+
+    el.style[eventPropertyName] = 'none';
+
+    if (!$.support.opacity) {
+      strictEqual(el.vml.color.shape.style[eventPropertyName], 'none');
+      strictEqual(el.vml.image.shape.style[eventPropertyName], 'none');
+    } else {
+      strictEqual(el.style[eventPropertyName], 'none');
+      ok(true);
+    }
+
+  });
+
 })(jQuery);
