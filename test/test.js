@@ -284,7 +284,8 @@
       // @fixme current version not apply 'style.backgroundImage' to 'el.vmlBg'
       strictEqual(el.vmlBg, propertyValue);
     } else {
-      strictEqual(el.style[eventPropertyName], 'url(' + getAbsolutePath(replaceImagePath) + ')');
+      // firefox : return relative path
+      strictEqual(getAbsolutePath(el.style[eventPropertyName].replace(/url\("?(.*?)"?\)/, '$1')), getAbsolutePath(replaceImagePath));
     }
 
   });
