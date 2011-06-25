@@ -1,11 +1,13 @@
 #!/bin/sh
-js="js/jquery.belatedPNG.js"
 
+exe_gjslint(){git
+  gjslint --strict $1 | sed -n '/^Line/p'  | while read line
+  do
+    if ! expr "${line}" : "^Line.*\?E:0110" >/dev/null ; then
+      echo ${line}
+    fi
+  done
+}
 
-gjslint --strict ${js} | sed -n '/^Line/p'  | while read line
-do
-	if ! expr "${line}" : "^Line.*\?E:0110" >/dev/null ; then
-		echo ${line}
-	fi
-done
-
+exe_gjslint "js/jquery.belatedPNG.js"
+exe_gjslint "test/test.js"
