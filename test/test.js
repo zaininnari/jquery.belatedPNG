@@ -177,31 +177,63 @@
     ok(Object.prototype.hasOwnProperty.call(el, 'isImg') ? el['isImg'] : true);
 
     eventPropertyName = 'width';
-    propertyValue = el[eventPropertyName];
     if (!$.support.opacity) {
       propertyValue = el.vml.image.fill.size.x / 72 * 96;
     } else {
-      propertyValue = defaultSize = el[eventPropertyName];
+      propertyValue = el[eventPropertyName];
     }
     el[eventPropertyName] = propertyValue + 8;
     if (!$.support.opacity) {
-      strictEqual(el.vml.image.fill.size.x / 72 * 96, propertyValue  + 8);
+      strictEqual(el.vml.image.fill.size.x / 72 * 96, propertyValue + 8);
     } else {
-      strictEqual(el[eventPropertyName], propertyValue + 1);
+      strictEqual(el[eventPropertyName], propertyValue + 8);
     }
 
     eventPropertyName = 'height';
-    propertyValue = el[eventPropertyName];
     if (!$.support.opacity) {
       propertyValue = el.vml.image.fill.size.y / 72 * 96;
     } else {
-      propertyValue = defaultSize = el[eventPropertyName];
+      propertyValue = el[eventPropertyName];
     }
     el[eventPropertyName] = propertyValue + 8;
     if (!$.support.opacity) {
-      strictEqual(el.vml.image.fill.size.y / 72 * 96, propertyValue  + 8);
+      strictEqual(el.vml.image.fill.size.y / 72 * 96, propertyValue + 8);
     } else {
-      strictEqual(el[eventPropertyName], propertyValue + 1);
+      strictEqual(el[eventPropertyName], propertyValue + 8);
+    }
+  });
+
+  test('readPropertyChange style.width / style.height', function() {
+    var eventPropertyName,
+        propertyValue,
+        el = document.getElementById(testIdFixPng);
+    expect(2);
+    $testIdFixPng.fixPng();
+
+    eventPropertyName = 'width';
+    if (!$.support.opacity) {
+      propertyValue = el.vml.image.fill.size.x / 72 * 96;
+    } else {
+      propertyValue = el.style[eventPropertyName];
+    }
+    el.style[eventPropertyName] = '8px';
+    if (!$.support.opacity) {
+      strictEqual(el.vml.image.fill.size.x / 72 * 96, 8);
+    } else {
+      strictEqual(el.style[eventPropertyName], '8px');
+    }
+
+    eventPropertyName = 'height';
+    if (!$.support.opacity) {
+      propertyValue = el.vml.image.fill.size.y / 72 * 96;
+    } else {
+      propertyValue = el.style[eventPropertyName];
+    }
+    el.style[eventPropertyName] = '8px';
+    if (!$.support.opacity) {
+      strictEqual(el.vml.image.fill.size.y / 72 * 96, 8);
+    } else {
+      strictEqual(el.style[eventPropertyName], '8px');
     }
   });
 
