@@ -351,4 +351,50 @@
 
   });
 
+  test('readPropertyChange filter opacity', function() {
+    var eventPropertyValue,
+        eventPropertyOpacityValue,
+        el = document.getElementById(testIdFixPng);
+
+    expect(6);
+    $testIdFixPng.fixPng();
+
+    eventPropertyOpacityValue = 0.5;
+    eventPropertyValue = 'alpha(opacity=' + (eventPropertyOpacityValue * 100) + ')';
+
+    if (!$.support.opacity) {
+      el.style.filter = eventPropertyValue;
+      strictEqual(el.vml.color.shape.style.filter, eventPropertyValue);
+      strictEqual(el.vml.image.fill.opacity, eventPropertyOpacityValue);
+    } else {
+      ok(true);
+      ok(true);
+    }
+
+    eventPropertyOpacityValue = 1;
+    eventPropertyValue = 'alpha(opacity=' + (eventPropertyOpacityValue * 100) + ')';
+
+    if (!$.support.opacity) {
+      el.style.filter = eventPropertyValue;
+      strictEqual(el.vml.color.shape.style.filter, eventPropertyValue);
+      strictEqual(el.vml.image.fill.opacity, eventPropertyOpacityValue);
+    } else {
+      ok(true);
+      ok(true);
+    }
+
+    eventPropertyOpacityValue = 0;
+    eventPropertyValue = 'alpha(opacity=' + (eventPropertyOpacityValue * 100) + ')';
+
+    if (!$.support.opacity) {
+      el.style.filter = eventPropertyValue;
+      strictEqual(el.vml.color.shape.style.filter, eventPropertyValue);
+      strictEqual(el.vml.image.fill.opacity, eventPropertyOpacityValue);
+    } else {
+      ok(true);
+      ok(true);
+    }
+
+  });
+
 })(jQuery);
