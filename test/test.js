@@ -103,52 +103,68 @@
   test('readPropertyChange mouseover', function() {
     var eventName = 'mouseover';
     expect(3);
-    $testIdFixPng[eventName](function() {
-      $(this).addClass(eventName);
-    });
     $testIdFixPng.fixPng();
     ok(Object.prototype.hasOwnProperty.call($testIdFixPng.get(0) , 'vmlInitiated') ? $testIdFixPng.attr('vmlInitiated') : true);
     strictEqual($testIdFixPng.hasClass(eventName), false);
-    $testIdFixPng.trigger(eventName);
+    $testIdFixPng.get(0)['on' + eventName] = function(){
+      $(this).addClass(eventName);
+    };
+    if (!$.support.opacity) {
+      $testIdFixPng.get(0).vml.image.shape['on' + eventName]();
+    } else {
+      $testIdFixPng.trigger(eventName);
+    }
     strictEqual($testIdFixPng.hasClass(eventName), true);
   });
 
   test('readPropertyChange mouseout', function() {
     var eventName = 'mouseout';
     expect(3);
-    $testIdFixPng[eventName](function() {
-      $(this).addClass(eventName);
-    });
     $testIdFixPng.fixPng();
     ok(Object.prototype.hasOwnProperty.call($testIdFixPng.get(0) , 'vmlInitiated') ? $testIdFixPng.attr('vmlInitiated') : true);
     strictEqual($testIdFixPng.hasClass(eventName), false);
-    $testIdFixPng.trigger(eventName);
+    $testIdFixPng.get(0)['on' + eventName] = function(){
+      $(this).addClass(eventName);
+    };
+    if (!$.support.opacity) {
+      $testIdFixPng.get(0).vml.image.shape['on' + eventName]();
+    } else {
+      $testIdFixPng.trigger(eventName);
+    }
     strictEqual($testIdFixPng.hasClass(eventName), true);
   });
 
   test('readPropertyChange mouseenter', function() {
     var eventName = 'mouseenter';
     expect(3);
-    $testIdFixPng[eventName](function() {
-      $(this).addClass(eventName);
-    });
     $testIdFixPng.fixPng();
     ok(Object.prototype.hasOwnProperty.call($testIdFixPng.get(0) , 'vmlInitiated') ? $testIdFixPng.attr('vmlInitiated') : true);
     strictEqual($testIdFixPng.hasClass(eventName), false);
-    $testIdFixPng.trigger(eventName);
+    $testIdFixPng.get(0)['on' + eventName] = function(){
+      $(this).addClass(eventName);
+    };
+    if (!$.support.opacity) {
+      $testIdFixPng.get(0).vml.image.shape['on' + eventName]();
+    } else {
+      $testIdFixPng.trigger(eventName);
+    }
     strictEqual($testIdFixPng.hasClass(eventName), true);
   });
 
   test('readPropertyChange mouseleave', function() {
     var eventName = 'mouseleave';
     expect(3);
-    $testIdFixPng[eventName](function() {
-      $(this).addClass(eventName);
-    });
     $testIdFixPng.fixPng();
     ok(Object.prototype.hasOwnProperty.call($testIdFixPng.get(0) , 'vmlInitiated') ? $testIdFixPng.attr('vmlInitiated') : true);
     strictEqual($testIdFixPng.hasClass(eventName), false);
-    $testIdFixPng.trigger(eventName);
+    $testIdFixPng.get(0)['on' + eventName] = function(){
+      $(this).addClass(eventName);
+    };
+    if (!$.support.opacity) {
+      $testIdFixPng.get(0).vml.image.shape['on' + eventName]();
+    } else {
+      $testIdFixPng.trigger(eventName);
+    }
     strictEqual($testIdFixPng.hasClass(eventName), true);
   });
 
