@@ -289,4 +289,35 @@
 
   });
 
+  test('readPropertyChange border', function() {
+    var eventPropertyName,
+        propertyValue,
+        el = document.getElementById(testIdFixPng),
+        borderStyle = 'solid',
+        borderWidth = '1px',
+        borderColor = '#ff0000';
+
+    expect(4);
+    $testIdFixPng.fixPng();
+    ok(Object.prototype.hasOwnProperty.call(el, 'isImg') ? el['isImg'] : true);
+
+    eventPropertyName = 'borderStyle';
+    if (!$.support.opacity) {
+      propertyValue = el.vmlBg;
+    }
+
+    $testIdFixPng.css({border: [borderStyle, borderWidth, borderColor].join(' ')});
+
+    if (!$.support.opacity) {
+      strictEqual(el.vml.color.shape.style['borderStyle'], borderStyle);
+      strictEqual(el.vml.color.shape.style['borderWidth'], borderWidth);
+      strictEqual(el.vml.color.shape.style['borderColor'], borderColor);
+    } else {
+      strictEqual(el.style['borderStyle'], borderStyle);
+      strictEqual(el.style['borderWidth'], borderWidth);
+      strictEqual(/^(#ff0000|rgb\(255, 0, 0\))$/i.test(el.style['borderColor']), true);
+    }
+
+  });
+
 })(jQuery);
