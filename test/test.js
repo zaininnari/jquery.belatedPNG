@@ -6,7 +6,8 @@
       testIdFixPng = 'fixPng',
       $testId,
       $testIdFixPng,
-      imagePath = '../test.png';
+      imagePath = '../test.png',
+      replaceImagePath = './test.png';
 
   test('createVmlNameSpace', function() {
     var ns = 'DD_belatedPNG',
@@ -235,6 +236,35 @@
     } else {
       strictEqual(el.style[eventPropertyName], '8px');
     }
+  });
+
+  test('readPropertyChange src', function() {
+    var eventPropertyName,
+        propertyValue,
+        el = document.getElementById(testIdFixPng),
+        getAbsolutePath = function(path) {
+          var e = document.createElement('div');
+          e.innerHTML = '<a href="' + path + '" />';
+          return e.firstChild.href;
+        };
+    expect(2);
+    $testIdFixPng.fixPng();
+    ok(Object.prototype.hasOwnProperty.call(el, 'isImg') ? el['isImg'] : true);
+
+    eventPropertyName = 'src';
+
+    if (!$.support.opacity) {
+      propertyValue = el.vmlBg;
+    } else {
+      propertyValue = el[eventPropertyName];
+    }
+    el.src = replaceImagePath;
+    if (!$.support.opacity) {
+      strictEqual(el.vmlBg, getAbsolutePath(replaceImagePath));
+    } else {
+      strictEqual(el.src, getAbsolutePath(replaceImagePath));
+    }
+
   });
 
 })(jQuery);
