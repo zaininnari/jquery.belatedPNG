@@ -106,7 +106,7 @@
     $testIdFixPng.fixPng();
     ok(Object.prototype.hasOwnProperty.call($testIdFixPng.get(0) , 'vmlInitiated') ? $testIdFixPng.attr('vmlInitiated') : true);
     strictEqual($testIdFixPng.hasClass(eventName), false);
-    $testIdFixPng.get(0)['on' + eventName] = function(){
+    $testIdFixPng.get(0)['on' + eventName] = function() {
       $(this).addClass(eventName);
     };
     if (!$.support.opacity) {
@@ -123,7 +123,7 @@
     $testIdFixPng.fixPng();
     ok(Object.prototype.hasOwnProperty.call($testIdFixPng.get(0) , 'vmlInitiated') ? $testIdFixPng.attr('vmlInitiated') : true);
     strictEqual($testIdFixPng.hasClass(eventName), false);
-    $testIdFixPng.get(0)['on' + eventName] = function(){
+    $testIdFixPng.get(0)['on' + eventName] = function() {
       $(this).addClass(eventName);
     };
     if (!$.support.opacity) {
@@ -140,7 +140,7 @@
     $testIdFixPng.fixPng();
     ok(Object.prototype.hasOwnProperty.call($testIdFixPng.get(0) , 'vmlInitiated') ? $testIdFixPng.attr('vmlInitiated') : true);
     strictEqual($testIdFixPng.hasClass(eventName), false);
-    $testIdFixPng.get(0)['on' + eventName] = function(){
+    $testIdFixPng.get(0)['on' + eventName] = function() {
       $(this).addClass(eventName);
     };
     if (!$.support.opacity) {
@@ -157,7 +157,7 @@
     $testIdFixPng.fixPng();
     ok(Object.prototype.hasOwnProperty.call($testIdFixPng.get(0) , 'vmlInitiated') ? $testIdFixPng.attr('vmlInitiated') : true);
     strictEqual($testIdFixPng.hasClass(eventName), false);
-    $testIdFixPng.get(0)['on' + eventName] = function(){
+    $testIdFixPng.get(0)['on' + eventName] = function() {
       $(this).addClass(eventName);
     };
     if (!$.support.opacity) {
@@ -166,6 +166,43 @@
       $testIdFixPng.trigger(eventName);
     }
     strictEqual($testIdFixPng.hasClass(eventName), true);
+  });
+
+  test('readPropertyChange width / height', function() {
+    var eventPropertyName,
+        propertyValue,
+        el = document.getElementById(testIdFixPng);
+    expect(3);
+    $testIdFixPng.fixPng();
+    ok(Object.prototype.hasOwnProperty.call(el, 'isImg') ? el['isImg'] : true);
+
+    eventPropertyName = 'width';
+    propertyValue = el[eventPropertyName];
+    if (!$.support.opacity) {
+      propertyValue = el.vml.image.fill.size.x / 72 * 96;
+    } else {
+      propertyValue = defaultSize = el[eventPropertyName];
+    }
+    el[eventPropertyName] = propertyValue + 8;
+    if (!$.support.opacity) {
+      strictEqual(el.vml.image.fill.size.x / 72 * 96, propertyValue  + 8);
+    } else {
+      strictEqual(el[eventPropertyName], propertyValue + 1);
+    }
+
+    eventPropertyName = 'height';
+    propertyValue = el[eventPropertyName];
+    if (!$.support.opacity) {
+      propertyValue = el.vml.image.fill.size.y / 72 * 96;
+    } else {
+      propertyValue = defaultSize = el[eventPropertyName];
+    }
+    el[eventPropertyName] = propertyValue + 8;
+    if (!$.support.opacity) {
+      strictEqual(el.vml.image.fill.size.y / 72 * 96, propertyValue  + 8);
+    } else {
+      strictEqual(el[eventPropertyName], propertyValue + 1);
+    }
   });
 
 })(jQuery);
