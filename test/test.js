@@ -101,14 +101,15 @@
   });
 
   test('readPropertyChange mouseover', function() {
-    $testIdFixPng.mouseover(function() {
-      $(this).addClass('mouseover');
+    var eventName = 'mouseover';
+    $testIdFixPng[eventName](function() {
+      $(this).addClass(eventName);
     });
     $testIdFixPng.fixPng();
     ok(Object.prototype.hasOwnProperty.call($testIdFixPng.get(0) , 'vmlInitiated') ? $testIdFixPng.attr('vmlInitiated') : true);
-    strictEqual($testIdFixPng.hasClass('mouseover'), false);
-    $testIdFixPng.trigger('mouseover');
-    strictEqual($testIdFixPng.hasClass('mouseover'), true);
+    strictEqual($testIdFixPng.hasClass(eventName), false);
+    $testIdFixPng.trigger(eventName);
+    strictEqual($testIdFixPng.hasClass(eventName), true);
   });
 
 })(jQuery);
