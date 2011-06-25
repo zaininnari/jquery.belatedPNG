@@ -1,7 +1,12 @@
 (function($) {
 
   module('setup test');
-  var ns = 'DD_belatedPNG';
+  var ns = 'DD_belatedPNG',
+    testId = 'testId',
+    testIdFixPng = 'fixPng',
+    $testId,
+    $testIdFixPng,
+    imagePath = '../test.png';
 
   test('createVmlNameSpace', function() {
     var ns = 'DD_belatedPNG',
@@ -66,6 +71,44 @@
 		ok(!styles[0].styleSheet);
 	}
  
+  });
+
+  module('Event test', {
+    setup: function() {
+      var div = document.createElement('div'),
+        img = document.createElement('img');
+      div.id = testId;
+      img.id = testIdFixPng;
+      img.src = imagePath;
+      div.appendChild(img);
+      document.getElementsByTagName('body')[0].appendChild(div);
+      $testId = $('#' + testId);
+      $testIdFixPng = $('#' + testIdFixPng);
+    },
+    teardown: function() {
+      $testId.remove();
+    }
+  });
+  
+  test('readPropertyChange base', function() {
+    $testIdFixPng.fixPng();
+    expect(1);
+    if (!$.support.opacity) {
+      ok($testIdFixPng.attr('vmlInitiated'));
+    } else {
+      ok(true);
+    }
+  });
+  
+  test('readPropertyChange mouseover', function() {
+	  $testIdFixPng.mouseover(function(){
+		$(this).addClass('mouseover');
+	  });
+	  $testIdFixPng.fixPng();
+	  ok(Object.prototype.hasOwnProperty.call($testIdFixPng.get(0) , 'vmlInitiated') ? $testIdFixPng.attr('vmlInitiated') : true);
+	  strictEqual($testIdFixPng.hasClass('mouseover'), false);
+	  $testIdFixPng.trigger('mouseover');
+	  strictEqual($testIdFixPng.hasClass('mouseover'), true);
   });
 
 })(jQuery);
