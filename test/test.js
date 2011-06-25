@@ -240,7 +240,6 @@
 
   test('readPropertyChange src', function() {
     var eventPropertyName,
-        propertyValue,
         el = document.getElementById(testIdFixPng),
         getAbsolutePath = function(path) {
           var e = document.createElement('div');
@@ -253,16 +252,39 @@
 
     eventPropertyName = 'src';
 
-    if (!$.support.opacity) {
-      propertyValue = el.vmlBg;
-    } else {
-      propertyValue = el[eventPropertyName];
-    }
     el.src = replaceImagePath;
     if (!$.support.opacity) {
       strictEqual(el.vmlBg, getAbsolutePath(replaceImagePath));
     } else {
-      strictEqual(el.src, getAbsolutePath(replaceImagePath));
+      strictEqual(el[eventPropertyName], getAbsolutePath(replaceImagePath));
+    }
+
+  });
+
+  test('readPropertyChange background', function() {
+    var eventPropertyName,
+        propertyValue,
+        el = document.getElementById(testIdFixPng),
+        getAbsolutePath = function(path) {
+          var e = document.createElement('div');
+          e.innerHTML = '<a href="' + path + '" />';
+          return e.firstChild.href;
+        };
+    expect(2);
+    $testIdFixPng.fixPng();
+    ok(Object.prototype.hasOwnProperty.call(el, 'isImg') ? el['isImg'] : true);
+
+    eventPropertyName = 'backgroundImage';
+    if (!$.support.opacity) {
+      propertyValue = el.vmlBg;
+    }
+
+    el.style[eventPropertyName] = 'url("' + replaceImagePath + '")';
+    if (!$.support.opacity) {
+      // @fixme current version not apply 'style.backgroundImage' to 'el.vmlBg'
+      strictEqual(el.vmlBg, propertyValue);
+    } else {
+      strictEqual(el.style[eventPropertyName], 'url(' + getAbsolutePath(replaceImagePath) + ')');
     }
 
   });
