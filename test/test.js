@@ -397,4 +397,43 @@
 
   });
 
+  module('method test', {
+    setup: function() {
+      var div = document.createElement('div'),
+          img = document.createElement('img');
+      div.id = testId;
+      img.id = testIdFixPng;
+      img.src = imagePath;
+      div.appendChild(img);
+      document.getElementsByTagName('body')[0].appendChild(div);
+      $testId = $('#' + testId);
+      $testIdFixPng = $('#' + testIdFixPng);
+    },
+    teardown: function() {
+      $testId.remove();
+    }
+  });
+
+  test('vmlOpacity', function() {
+    var propertyValue,
+        propertyOpacityValue,
+        el = document.getElementById(testIdFixPng);
+
+    expect(202);
+    $testIdFixPng.fixPng();
+
+    for (var i = 0, l = 100; i <= l; i++) {
+      propertyOpacityValue = i / 100;
+      propertyValue = 'alpha(opacity=' + ((propertyOpacityValue * 1000) | 0) / 10 + ')';
+      if (!$.support.opacity) {
+        el.style.filter = propertyValue;
+        strictEqual(el.vml.color.shape.style.filter, propertyValue);
+        strictEqual(Math.round(el.vml.image.fill.opacity * 100) / 100, propertyOpacityValue);
+      } else {
+        ok(true);
+        ok(true);
+      }
+    }
+  });
+
 })(jQuery);
