@@ -436,4 +436,25 @@
     }
   });
 
+  test('giveLayout', function() {
+    var propertyValue,
+        propertyOpacityValue,
+        el = document.getElementById(testIdFixPng),
+        style_ = el.currentStyle || document.defaultView.getComputedStyle(el, null);
+
+    expect(4);
+
+    strictEqual(Object.prototype.hasOwnProperty.call(el.style, 'zoom') && el.style.zoom ? el.style.zoom : false, false);
+    strictEqual(style_.position, 'static');
+    $testIdFixPng.fixPng();
+
+    if (!$.support.opacity) {
+      strictEqual(el.style.zoom, '1');
+      strictEqual(style_.position, 'relative');
+    } else {
+      strictEqual(style_.position, 'static');
+      strictEqual(Object.prototype.hasOwnProperty.call(el.style, 'zoom') && el.style.zoom ? el.style.zoom : false, false);
+    }
+  });
+
 })(jQuery);
